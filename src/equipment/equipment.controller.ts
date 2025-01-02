@@ -13,7 +13,7 @@ export class EquipmentController {
     return res.status(200).json(this.formatResponse(200, 'Success', data));
   }
 
-  @Get('by-name')
+  @Get('byName')
   getEquipmentByName(
     @Query('name') name: string,
     @Res() res: Response,
