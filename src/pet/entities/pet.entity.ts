@@ -11,6 +11,6 @@ export class PetEntity {
   @Column({ length: 20 })
   birthday: string // 添加生日字段
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column('datetime', { default: () => 'CURRENT_TIMESTAMP' })
   create_time: Date
 }

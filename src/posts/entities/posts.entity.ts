@@ -17,9 +17,9 @@ export class PostsEntity {
   @Column({ default: '' })
   thumb_url: string
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column('datetime', { default: () => 'CURRENT_TIMESTAMP' })
   create_time: Date
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column('datetime', { default: () => 'CURRENT_TIMESTAMP' })
   update_time: Date
 }
