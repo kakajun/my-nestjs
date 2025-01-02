@@ -3,7 +3,6 @@
 - 使用 `typeorm` 连接数据库，实现简单的 `CRUD`，实现接口的统一格式，自动生成 `swagger` 文档
 - 通过 `docker` + `GITHUB ACTION` 自动化部署到腾讯云服务器上，并通过域名访问接口，真正实战落地
 - 使用 `JWT` 实现用户注册登录，身份验证（`token`）拦截返回 `401`
-- 学习 `redis` 数据库，在服务器上安装 `redis`，并在 `nest` 中落地使用
 - 通过 `Multer` 实现文件上传
 - 使用 `Winston` 保存日志
 - 使用 `@nestjs/schedule` 封装定时器
@@ -78,7 +77,7 @@
 
 <!---->
 
-    yarn add @nestjs/typeorm typeorm mysql2 @nestjs/config cross-env -S
+    yarn add @nestjs/typeorm typeorm sqlite3 @nestjs/config cross-env -S
 
 - `package.json` 中修改命令指定开发环境变量
 
@@ -89,17 +88,8 @@
 - 在根目录下新建 `.env 以及 .env.prod` 配置文件
 
 <!---->
-
-    // 数据库地址
-    DB_HOST=
-    // 数据库端口
-    DB_PORT=3306
-    // 数据库登录名
-    DB_USER=
-    // 数据库登录密码
-    DB_PASSWD=
     // 数据库名字
-    DB_DATABASE=
+    DB_NAME=
     // 当前环境，测试环境为 test
     NODE_ENV=production
 
