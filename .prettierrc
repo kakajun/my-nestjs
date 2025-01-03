@@ -3,5 +3,6 @@
   "trailingComma": "all",
   "semi": false,
   "quoteProps": "as-needed",
+  "printWidth": 200,
   "endOfLine": "auto"
 }

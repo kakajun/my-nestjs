@@ -5,7 +5,7 @@ import { TransformInterceptor } from './core/interceptor/transform/transform.int
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { ValidationPipe } from '@nestjs/common'
 import { NestExpressApplication } from '@nestjs/platform-express'
-import { LoggerService } from './logger/logger.service'
+import { LoggerService } from './module/monitor/logger/logger.service'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)

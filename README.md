@@ -88,6 +88,7 @@
 - 在根目录下新建 `.env 以及 .env.prod` 配置文件
 
 <!---->
+
     // 数据库名字
     DB_NAME=
     // 当前环境，测试环境为 test
@@ -978,7 +979,7 @@ jobs:
 <!---->
 
     import { JwtModule } from '@nestjs/jwt';
-    import { jwtConstants } from '../common/constants';
+    import { jwtConstants } from '@/common/constants';
 
     imports: [
         TypeOrmModule.forFeature([AuthEntity]),
@@ -1102,7 +1103,7 @@ jobs:
     import { Injectable } from '@nestjs/common';
     import { PassportStrategy } from '@nestjs/passport';
     import { ExtractJwt, Strategy } from 'passport-jwt';
-    import { jwtConstants } from '../common/constants';
+    import { jwtConstants } from '@/common/constants';
 
     export interface JwtPayload {
       username: string;
@@ -1138,7 +1139,7 @@ jobs:
     import { TypeOrmModule } from '@nestjs/typeorm';
     import { AuthEntity } from './entities/auth.entity';
     import { JwtModule } from '@nestjs/jwt';
-    import { jwtConstants } from '../common/constants';
+    import { jwtConstants } from '@/common/constants';
     import JwtAuthStrategy from './jwt-auth.strategy';
 
     @Module({
@@ -1734,7 +1735,7 @@ this.redisService.set(signupData.username, signupData.password);
       ExceptionFilter,
       HttpException,
     } from '@nestjs/common';
-    import { LoggerService } from '../../../logger/logger.service';
+    import { LoggerService } from '../../@/module/monitor/logger/logger.service';
 
     @Catch(HttpException)
     export class HttpExceptionFilter implements ExceptionFilter {
@@ -1804,7 +1805,7 @@ this.redisService.set(signupData.username, signupData.password);
       NestInterceptor,
     } from '@nestjs/common';
     import { map, Observable, tap } from 'rxjs';
-    import { LoggerService } from '../../../logger/logger.service';
+    import { LoggerService } from '../../@/module/monitor/logger/logger.service';
 
     @Injectable()
     export class TransformInterceptor implements NestInterceptor {

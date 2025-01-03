@@ -19,7 +19,7 @@ import {
 } from '@nestjs/common'
 import { CreatePostDto } from './dto/create-post.dot'
 import { UpdatePostDto } from './dto/update-post.dto' // 假设你有一个 DTO 来定义请求体
-import { LoggerService } from '../logger/logger.service'
+import { LoggerService } from '@/module/monitor/logger/logger.service'
 
 @ApiTags('文章')
 @Controller('articles')

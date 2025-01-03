@@ -2,7 +2,7 @@ import { HttpException, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { PostsEntity } from './entities/posts.entity'
-import { LoggerService } from '../logger/logger.service'
+import { LoggerService } from '@/module/monitor/logger/logger.service'
 
 export interface PostsRo {
   list: PostsEntity[]
@@ -36,6 +36,7 @@ export class PostsService {
     const count = await qb.getCount()
     const { pageNum = 1, pageSize = 10, ...params } = query
     // this.logger.log('Parsed query params:', { pageNum, pageSize, params })
+
     qb.limit(pageSize)
     qb.offset(pageSize * (pageNum - 1))
     const posts = await qb.getMany()
