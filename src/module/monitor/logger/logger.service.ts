@@ -46,11 +46,7 @@ export class LoggerService {
               const paramsInfo = JSON.parse(JSON.stringify(info))
               // 避免 message 字段在日志中作为 key 出现
               delete paramsInfo.message
-              return `${info.timestamp} [${info.level}] : ${info.message} ${
-                Object.keys(info).length
-                  ? JSON.stringify(paramsInfo, null, 2)
-                  : ''
-              }`
+              return `${info.timestamp} [${info.level}] : ${info.message} ${Object.keys(info).length ? JSON.stringify(paramsInfo, null, 2) : ''}`
             }),
           ),
         }),

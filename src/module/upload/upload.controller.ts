@@ -1,19 +1,5 @@
-import {
-  Controller,
-  Post,
-  UseInterceptors,
-  Get,
-  UploadedFiles,
-  BadRequestException,
-} from '@nestjs/common'
-import {
-  ApiBearerAuth,
-  ApiBody,
-  ApiTags,
-  ApiConsumes,
-  ApiOperation,
-  ApiResponse,
-} from '@nestjs/swagger'
+import { Controller, Post, UseInterceptors, Get, UploadedFiles, BadRequestException } from '@nestjs/common'
+import { ApiBearerAuth, ApiBody, ApiTags, ApiConsumes, ApiOperation, ApiResponse } from '@nestjs/swagger'
 import { FilesInterceptor } from '@nestjs/platform-express'
 import { UploadService } from './upload.service'
 import * as multer from 'multer'

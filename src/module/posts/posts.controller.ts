@@ -1,22 +1,6 @@
-import {
-  ApiBearerAuth,
-  ApiOperation,
-  ApiParam,
-  ApiBody,
-  ApiQuery,
-  ApiTags,
-} from '@nestjs/swagger'
+import { ApiBearerAuth, ApiOperation, ApiParam, ApiBody, ApiQuery, ApiTags } from '@nestjs/swagger'
 import { PostsService, PostsRo } from './posts.service'
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-  Query,
-} from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common'
 import { CreatePostDto } from './dto/create-post.dot'
 import { UpdatePostDto } from './dto/update-post.dto' // 假设你有一个 DTO 来定义请求体
 import { LoggerService } from '@/module/monitor/logger/logger.service'

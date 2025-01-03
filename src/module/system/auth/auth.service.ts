@@ -11,7 +11,6 @@ export class AuthService {
   constructor(
     @InjectRepository(AuthEntity) private readonly auth: Repository<AuthEntity>,
     private readonly jwtService: JwtService, // 修改为小写驼峰命名法
-
   ) {}
 
   // 注册
@@ -19,8 +18,7 @@ export class AuthService {
     const findUser = await this.auth.findOne({
       where: { username: signupData.username },
     })
-    if (findUser && findUser.username === signupData.username)
-      return '用户已存在'
+    if (findUser && findUser.username === signupData.username) return '用户已存在'
     // 对密码进行加密处理
     signupData.password = bcryptjs.hashSync(signupData.password, 10)
     await this.auth.save(signupData)
@@ -37,10 +35,7 @@ export class AuthService {
     if (!findUser) return new BadRequestException('用户不存在')
 
     // 找到了对比密码
-    const compareRes: boolean = bcryptjs.compareSync(
-      loginData.password,
-      findUser.password,
-    )
+    const compareRes: boolean = bcryptjs.compareSync(loginData.password, findUser.password)
     // 密码不正确
     if (!compareRes) return new BadRequestException('密码不正确')
     const payload = { username: findUser.username }

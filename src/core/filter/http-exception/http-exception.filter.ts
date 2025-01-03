@@ -1,9 +1,4 @@
-import {
-  ArgumentsHost,
-  Catch,
-  ExceptionFilter,
-  HttpException,
-} from '@nestjs/common'
+import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common'
 import { LoggerService } from '@/module/monitor/logger/logger.service'
 
 @Catch(HttpException)
@@ -23,14 +18,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
     let validMessage = ''
 
     if (typeof exceptionResponse === 'object') {
-      validMessage =
-        typeof exceptionResponse.message === 'string'
-          ? exceptionResponse.message
-          : exceptionResponse.message[0]
+      validMessage = typeof exceptionResponse.message === 'string' ? exceptionResponse.message : exceptionResponse.message[0]
     }
-    const message = exception.message
-      ? exception.message
-      : `${status >= 500 ? 'Service Error' : 'Client Error'}`
+    const message = exception.message ? exception.message : `${status >= 500 ? 'Service Error' : 'Client Error'}`
 
     const errorResponse = {
       code: -1,

@@ -11,12 +11,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
 
   // 注册swagger
-  const config = new DocumentBuilder()
-    .setTitle('管理后台')
-    .setDescription('管理后台学习NestJs接口文档')
-    .setVersion('1.0')
-    .addBearerAuth()
-    .build()
+  const config = new DocumentBuilder().setTitle('管理后台').setDescription('管理后台学习NestJs接口文档').setVersion('1.0').addBearerAuth().build()
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('docs', app, document, {
     swaggerOptions: {
