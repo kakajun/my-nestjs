@@ -1,13 +1,18 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Response } from 'express'
 import { Repository, In } from 'typeorm'
 import { ResultData } from 'src/common/utils/result'
 import { CacheEnum } from 'src/common/enum/index'
-import { ExportTable } from 'src/common/utils/export'
 import { SysDictTypeEntity } from './entities/dict.type.entity'
 import { SysDictDataEntity } from './entities/dict.data.entity'
-import { CreateDictTypeDto, UpdateDictTypeDto, ListDictType, CreateDictDataDto, UpdateDictDataDto, ListDictData } from './dto/index'
+import {
+  CreateDictTypeDto,
+  UpdateDictTypeDto,
+  ListDictType,
+  CreateDictDataDto,
+  UpdateDictDataDto,
+  ListDictData,
+} from './dto/index'
 import { RedisService } from 'src/module/redis/redis.service'
 @Injectable()
 export class DictService {
@@ -50,7 +55,10 @@ export class DictService {
     }
 
     if (query.params?.beginTime && query.params?.endTime) {
-      entity.andWhere('entity.createTime BETWEEN :start AND :end', { start: query.params.beginTime, end: query.params.endTime })
+      entity.andWhere('entity.createTime BETWEEN :start AND :end', {
+        start: query.params.beginTime,
+        end: query.params.endTime,
+      })
     }
 
     if (query.pageSize && query.pageNum) {
@@ -171,27 +179,6 @@ export class DictService {
   }
 
   /**
-   * 导出字典数据为xlsx文件
-   * @param res
-   */
-  async export(res: Response, body: ListDictType) {
-    delete body.pageNum
-    delete body.pageSize
-    const list = await this.findAllType(body)
-    const options = {
-      sheetName: '字典数据',
-      data: list.data.list,
-      header: [
-        { title: '字典主键', dataIndex: 'dictId' },
-        { title: '字典名称', dataIndex: 'dictName' },
-        { title: '字典类型', dataIndex: 'dictType' },
-        { title: '状态', dataIndex: 'status' },
-      ],
-    }
-    ExportTable(options, res)
-  }
-
-  /**
    * 刷新字典缓存
    * @returns
    */
@@ -219,7 +206,12 @@ export class DictService {
   async loadingDictCache() {
     const entity = this.sysDictTypeEntityRep.createQueryBuilder('entity')
     entity.where('entity.delFlag = :delFlag', { delFlag: '0' })
-    entity.leftJoinAndMapMany('entity.dictTypeList', SysDictDataEntity, 'dictType', 'dictType.dictType = entity.dictType')
+    entity.leftJoinAndMapMany(
+      'entity.dictTypeList',
+      SysDictDataEntity,
+      'dictType',
+      'dictType.dictType = entity.dictType',
+    )
     const list = await entity.getMany()
     list.forEach((item: any) => {
       if (item.dictType) {

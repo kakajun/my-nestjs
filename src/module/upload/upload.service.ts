@@ -32,7 +32,10 @@ export class UploadService {
     }
 
     // 获取上传路径
-    const uploadPath = this.configService.get('NODE_ENV') === 'production' ? '/www/wwwroot/blog.junfeng530.xyz/uploads' : path.join(__dirname, '..', '..', 'uploads')
+    const uploadPath =
+      this.configService.get('NODE_ENV') === 'production'
+        ? '/www/wwwroot/blog.junfeng530.xyz/uploads'
+        : path.join(__dirname, '..', '..', 'uploads')
 
     // 检查目标路径是否存在，如果不存在则创建
     if (!fs.existsSync(uploadPath)) {
@@ -51,7 +54,10 @@ export class UploadService {
   }
 
   async getAllUploadedFiles(): Promise<string[]> {
-    const uploadPath = this.configService.get('NODE_ENV') === 'production' ? '/www/wwwroot/blog.junfeng530.xyz/uploads' : path.join(__dirname, '..', '..', 'uploads')
+    const uploadPath =
+      this.configService.get('NODE_ENV') === 'production'
+        ? '/www/wwwroot/blog.junfeng530.xyz/uploads'
+        : path.join(__dirname, '..', '..', 'uploads')
 
     if (!fs.existsSync(uploadPath)) {
       this.logger.warn(`Upload path does not exist: ${uploadPath}`)

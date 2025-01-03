@@ -1,9 +1,16 @@
 import { Controller, Get, Post, Body, Query, Request, Put, Res, HttpCode, Param, Delete } from '@nestjs/common'
 import { ApiTags, ApiOperation, ApiBody, ApiConsumes, ApiQuery, ApiBearerAuth } from '@nestjs/swagger'
 import { DictService } from './dict.service'
-import { CreateDictTypeDto, UpdateDictTypeDto, ListDictType, CreateDictDataDto, UpdateDictDataDto, ListDictData } from './dto/index'
+import {
+  CreateDictTypeDto,
+  UpdateDictTypeDto,
+  ListDictType,
+  CreateDictDataDto,
+  UpdateDictDataDto,
+  ListDictData,
+} from './dto/index'
 import { RequirePermission } from 'src/common/decorators/require-premission.decorator'
-import { Response } from 'express'
+
 import { GetNowDate } from 'src/common/utils'
 
 @ApiTags('字典管理')
@@ -137,12 +144,5 @@ export class DictController {
   @Get('/data/type/:id')
   findOneDataType(@Param('id') dictType: string) {
     return this.dictService.findOneDataType(dictType)
-  }
-
-  @ApiOperation({ summary: '导出字典数据为xlsx文件' })
-  @RequirePermission('system:dict:export')
-  @Post('/type/export')
-  async export(@Res() res: Response, @Body() body: ListDictType): Promise<void> {
-    return this.dictService.export(res, body)
   }
 }

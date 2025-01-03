@@ -10,7 +10,7 @@ import { AuthModule } from './module/system/auth/auth.module'
 import { AuthEntity } from './module/system/auth/entities/auth.entity'
 import { APP_GUARD } from '@nestjs/core'
 import { jwtAuthGuard } from './module/system/auth/jwt-auth.grard'
-
+import { RedisModule } from './module/redis/redis.module'
 import { UploadModule } from './module/upload/upload.module'
 import { LoggerService } from './module/monitor/logger/logger.service'
 import { TimerService } from './timer/timer.service'
@@ -34,6 +34,30 @@ import { PetEntity } from './module/pet/entities/pet.entity'
         synchronize: true, //根据实体自动创建数据库表， 生产环境建议关闭
       }),
     }),
+
+    // redis
+    RedisModule.forRootAsync(
+      {
+        imports: [ConfigModule],
+        inject: [ConfigService],
+        useFactory: (config: ConfigService) => {
+          return {
+            closeClient: true,
+            readyLog: true,
+            errorLog: true,
+            config: {
+              host: config.get('REDIS_HOST'),
+              password: config.get('REDIS_PASSWORD'),
+              port: config.get('REDIS_PORT'),
+              db: config.get('REDIS_DB'),
+              keyPrefix: config.get('REDIS_KEY_PREFIX'),
+            },
+          }
+        },
+      },
+      true,
+    ),
+
     PostsModule,
     AuthModule,
     UploadModule,

@@ -1735,7 +1735,7 @@ this.redisService.set(signupData.username, signupData.password);
       ExceptionFilter,
       HttpException,
     } from '@nestjs/common';
-    import { LoggerService } from '../../@/module/monitor/logger/logger.service';
+    import { LoggerService } from '@/module/monitor/logger/logger.service';
 
     @Catch(HttpException)
     export class HttpExceptionFilter implements ExceptionFilter {
@@ -1805,7 +1805,7 @@ this.redisService.set(signupData.username, signupData.password);
       NestInterceptor,
     } from '@nestjs/common';
     import { map, Observable, tap } from 'rxjs';
-    import { LoggerService } from '../../@/module/monitor/logger/logger.service';
+    import { LoggerService } from '@/module/monitor/logger/logger.service';
 
     @Injectable()
     export class TransformInterceptor implements NestInterceptor {

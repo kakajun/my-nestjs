@@ -18,7 +18,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
     let validMessage = ''
 
     if (typeof exceptionResponse === 'object') {
-      validMessage = typeof exceptionResponse.message === 'string' ? exceptionResponse.message : exceptionResponse.message[0]
+      validMessage =
+        typeof exceptionResponse.message === 'string' ? exceptionResponse.message : exceptionResponse.message[0]
     }
     const message = exception.message ? exception.message : `${status >= 500 ? 'Service Error' : 'Client Error'}`
 
